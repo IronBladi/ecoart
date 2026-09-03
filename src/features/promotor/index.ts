@@ -1,0 +1,1 @@
+export { default as DashboardPromotor } from "./pages/DashboardPromotor";

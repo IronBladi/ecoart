@@ -1,0 +1,1 @@
+export { default as TipoCambioCard } from "./components/TipoCambioCard";

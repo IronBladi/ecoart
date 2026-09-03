@@ -1,0 +1,1 @@
+export { default as DashboardGerente } from "./pages/DashboardGerente";
