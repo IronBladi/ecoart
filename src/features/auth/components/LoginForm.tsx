@@ -1,42 +1,25 @@
-import {
-    useState,
-} from "react";
+import { useState } from "react";
 
-import {
-    useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import {
-    useForm,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import {
-    yupResolver,
-} from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import {
-    loginSchema,
-} from "../validation/login.schema";
+import { loginSchema } from "../validation/login.schema";
 
-import type {
-    LoginRequest,
-} from "../types";
+import type { LoginRequest } from "../types";
 
-import {
-    useAuth,
-} from "../hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 import axios from "axios";
 
 
 const LoginForm = () => {
 
-    const {
-        login,
-    } = useAuth();
+    const { login } = useAuth();
 
     const navigate = useNavigate();
-
 
     const [
         errorLogin,
@@ -45,28 +28,18 @@ const LoginForm = () => {
 
 
     const {
-
         register,
-
         handleSubmit,
-
         formState: {
             errors,
             isSubmitting,
         },
-
     } = useForm<LoginRequest>({
-
         resolver: yupResolver(loginSchema),
-
         defaultValues: {
-
             correo: "",
-
             password: "",
-
         },
-
     });
 
 
@@ -112,8 +85,7 @@ const LoginForm = () => {
 
             }
 
-        }
-        catch (error) {
+        } catch (error) {
 
             console.error(
                 "Error al iniciar sesión:",
@@ -133,8 +105,7 @@ const LoginForm = () => {
                         mensaje
                     );
 
-                }
-                else {
+                } else {
 
                     setErrorLogin(
                         "No fue posible iniciar sesión. Verifique sus credenciales."
@@ -142,8 +113,7 @@ const LoginForm = () => {
 
                 }
 
-            }
-            else {
+            } else {
 
                 setErrorLogin(
                     "Ocurrió un error al iniciar sesión. Intente nuevamente."
@@ -152,6 +122,20 @@ const LoginForm = () => {
             }
 
         }
+
+    };
+
+
+    const recuperarPassword = () => {
+
+        navigate("/recuperar-password");
+
+    };
+
+
+    const volverAlInicio = () => {
+
+        navigate("/");
 
     };
 
@@ -306,7 +290,33 @@ const LoginForm = () => {
 
 
             {/* =========================
-                BOTÓN
+                RECUPERAR CONTRASEÑA
+            ========================== */}
+
+            <div className="text-right">
+
+                <button
+                    type="button"
+                    onClick={recuperarPassword}
+                    className="
+                        text-sm
+                        font-medium
+                        text-emerald-600
+                        transition
+                        hover:text-emerald-700
+                        hover:underline
+                    "
+                >
+
+                    ¿Olvidaste tu contraseña?
+
+                </button>
+
+            </div>
+
+
+            {/* =========================
+                INICIAR SESIÓN
             ========================== */}
 
             <button
@@ -321,6 +331,7 @@ const LoginForm = () => {
                     text-white
                     transition
                     hover:bg-emerald-700
+                    disabled:cursor-not-allowed
                     disabled:opacity-60
                 "
             >
@@ -334,6 +345,32 @@ const LoginForm = () => {
             </button>
 
 
+            {/* =========================
+                VOLVER AL INICIO
+            ========================== */}
+
+            <button
+                type="button"
+                onClick={volverAlInicio}
+                className="
+                    w-full
+                    rounded-lg
+                    border
+                    border-gray-300
+                    bg-white
+                    py-3
+                    font-semibold
+                    text-gray-700
+                    transition
+                    hover:bg-gray-50
+                "
+            >
+
+                Volver al inicio
+
+            </button>
+
+
         </form>
 
     );
@@ -342,3 +379,4 @@ const LoginForm = () => {
 
 
 export default LoginForm;
+
