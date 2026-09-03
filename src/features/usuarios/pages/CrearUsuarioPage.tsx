@@ -6,6 +6,7 @@ import { useUsuarios } from "../hooks/useUsuarios";
 
 import type {
     CrearUsuarioRequest,
+    UsuarioFormData,
 } from "../types";
 
 const CrearUsuarioPage = () => {
@@ -17,10 +18,37 @@ const CrearUsuarioPage = () => {
     } = useUsuarios();
 
     const handleSubmit = async (
-        data: CrearUsuarioRequest
+        data: UsuarioFormData
     ) => {
 
-        await crear(data);
+        // Validación de seguridad para TypeScript.
+        // Estos campos son obligatorios al crear un usuario.
+        if (
+            !data.nombre ||
+            !data.correo ||
+            !data.password ||
+            data.idRol === undefined
+        ) {
+            return;
+        }
+
+        const usuario: CrearUsuarioRequest = {
+
+            nombre: data.nombre,
+
+            apellido: data.apellido,
+
+            correo: data.correo,
+
+            telefono: data.telefono,
+
+            password: data.password,
+
+            idRol: data.idRol,
+
+        };
+
+        await crear(usuario);
 
         navigate("/usuarios");
 
