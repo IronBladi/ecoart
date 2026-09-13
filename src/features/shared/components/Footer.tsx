@@ -50,7 +50,7 @@ const Footer = () => {
     return (
 
         <footer
-            className="bg-[#0F382C] text-white"
+            className="bg-gradient-to-r from-[#0F382C] to-[#1E5642] text-white"
             aria-label="Pie de página de EcoArt"
         >
 
