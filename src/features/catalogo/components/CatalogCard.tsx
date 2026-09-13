@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
     FiMapPin,
     FiStar,
-    FiEye,
+    FiArrowRight,
 } from "react-icons/fi";
 
 import {
@@ -37,29 +37,39 @@ const CatalogCard = ({
             fotoPrincipal?.url
         );
 
+    const tieneValoracion =
+        inmueble.cantidadValoraciones > 0;
+
 
     return (
 
         <article
             className="
+                group
+                flex
+                flex-col
                 overflow-hidden
-                rounded-3xl
+                rounded-2xl
                 bg-white
-                shadow-md
-                transition
+                border
+                border-gray-100/80
+                shadow-sm
+                transition-all
                 duration-300
                 hover:-translate-y-1
-                hover:shadow-xl
+                hover:shadow-lg
+                hover:border-gray-200/80
             "
         >
 
-            {/* Imagen */}
+            {/* ── Imagen ──────────────────────────────── */}
 
             <div
                 className="
                     relative
-                    h-64
+                    h-56
                     overflow-hidden
+                    shrink-0
                 "
             >
 
@@ -70,139 +80,254 @@ const CatalogCard = ({
                         h-full
                         w-full
                         object-cover
+                        object-center
+                        transition-transform
+                        duration-500
+                        ease-out
+                        group-hover:scale-[1.04]
                     "
+                    loading="lazy"
                 />
 
-
+                {/* Overlay degradado para badges */}
                 <div
                     className="
                         absolute
-                        right-4
-                        top-4
-                        rounded-full
-                        bg-white/90
-                        px-4
-                        py-2
-                        text-sm
-                        font-semibold
-                        text-[#386641]
-                        shadow
+                        inset-0
+                        bg-gradient-to-t
+                        from-black/30
+                        via-transparent
+                        to-transparent
+                    "
+                />
+
+                {/* Badge — código de inmueble */}
+                <div
+                    className="
+                        absolute
+                        left-3
+                        top-3
+                        flex
+                        items-center
+                        gap-1.5
                     "
                 >
-
-                    {inmueble.moneda}{" "}
-                    {inmueble.precio?.toLocaleString()}
-
+                    <span
+                        className="
+                            rounded-full
+                            bg-[#0F382C]/80
+                            backdrop-blur-sm
+                            border
+                            border-white/20
+                            px-2.5
+                            py-0.5
+                            text-[10px]
+                            font-bold
+                            uppercase
+                            tracking-wider
+                            text-white
+                        "
+                    >
+                        {inmueble.codigo}
+                    </span>
                 </div>
+
+                {/* Badge — precio flotante */}
+                {inmueble.precio != null && (
+                    <div
+                        className="
+                            absolute
+                            bottom-3
+                            right-3
+                        "
+                    >
+                        <span
+                            className="
+                                inline-flex
+                                items-baseline
+                                gap-1
+                                rounded-xl
+                                bg-white/95
+                                backdrop-blur-sm
+                                px-3
+                                py-1.5
+                                shadow-sm
+                            "
+                        >
+                            <span
+                                className="
+                                    text-[10px]
+                                    font-bold
+                                    uppercase
+                                    tracking-wider
+                                    text-gray-400
+                                "
+                            >
+                                {inmueble.moneda}
+                            </span>
+                            <span
+                                className="
+                                    text-base
+                                    font-extrabold
+                                    text-[#0F382C]
+                                "
+                            >
+                                {inmueble.precio.toLocaleString()}
+                            </span>
+                        </span>
+                    </div>
+                )}
 
             </div>
 
 
-            {/* Contenido */}
+            {/* ── Contenido ───────────────────────────── */}
 
-            <div className="p-6">
+            <div
+                className="
+                    flex
+                    flex-1
+                    flex-col
+                    p-5
+                "
+            >
 
+                {/* Título */}
                 <h3
                     className="
-                        text-2xl
-                        font-bold
-                        text-[#386641]
+                        text-base
+                        font-extrabold
+                        leading-snug
+                        text-[#0F382C]
+                        line-clamp-2
                     "
                 >
                     {inmueble.titulo}
                 </h3>
 
 
-                <p
-                    className="
-                        mt-3
-                        line-clamp-2
-                        text-gray-600
-                    "
-                >
-                    {inmueble.descripcion}
-                </p>
-
-
-                <div
-                    className="
-                        mt-5
-                        flex
-                        items-center
-                        gap-2
-                        text-gray-500
-                    "
-                >
-
-                    <FiMapPin />
-
-                    <span>
-                        {inmueble.ciudad},{" "}
-                        {inmueble.departamento}
-                    </span>
-
-                </div>
-
-
-                <div
-                    className="
-                        mt-4
-                        flex
-                        items-center
-                        gap-2
-                    "
-                >
-
-                    <FiStar
+                {/* Descripción breve */}
+                {inmueble.descripcion && (
+                    <p
                         className="
-                            text-yellow-500
-                        "
-                    />
-
-                    <span
-                        className="
-                            font-semibold
+                            mt-2
+                            text-sm
+                            leading-relaxed
+                            text-gray-500
+                            line-clamp-2
                         "
                     >
-                        {Number(
-                            inmueble.puntuacionPromedio
-                        ).toFixed(1)}
-                    </span>
+                        {inmueble.descripcion}
+                    </p>
+                )}
 
-                    <span
+
+                {/* Metadatos */}
+                <div
+                    className="
+                        mt-3
+                        flex
+                        flex-col
+                        gap-1.5
+                    "
+                >
+
+                    {/* Ubicación */}
+                    <div
                         className="
-                            text-sm
+                            flex
+                            items-center
+                            gap-1.5
+                            text-xs
                             text-gray-500
                         "
                     >
-                        ({inmueble.cantidadValoraciones} valoraciones)
-                    </span>
+                        <FiMapPin
+                            size={12}
+                            className="shrink-0 text-[#10B981]"
+                        />
+                        <span>
+                            {inmueble.ciudad},&nbsp;{inmueble.departamento}
+                            {inmueble.zona && ` · ${inmueble.zona}`}
+                        </span>
+                    </div>
+
+                    {/* Valoración */}
+                    {tieneValoracion && (
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-1.5
+                                text-xs
+                                text-gray-500
+                            "
+                        >
+                            <FiStar
+                                size={12}
+                                className="shrink-0 text-amber-400"
+                            />
+                            <span className="font-semibold text-gray-700">
+                                {Number(inmueble.puntuacionPromedio).toFixed(1)}
+                            </span>
+                            <span>
+                                ({inmueble.cantidadValoraciones} valoración{inmueble.cantidadValoraciones !== 1 ? "es" : ""})
+                            </span>
+                        </div>
+                    )}
 
                 </div>
 
 
+                {/* Separador */}
+                <div
+                    className="
+                        my-4
+                        border-t
+                        border-gray-100
+                    "
+                />
+
+
+                {/* CTA — enlace al detalle */}
+                {/* Ruta original: /catalogo/:id — intacta */}
                 <Link
                     to={`/catalogo/${inmueble.id}`}
                     className="
-                        mt-6
-                        flex
+                        group/cta
+                        mt-auto
+                        inline-flex
                         items-center
                         justify-center
                         gap-2
                         rounded-xl
-                        bg-[#386641]
-                        py-3
-                        font-semibold
+                        bg-[#0F382C]
+                        px-5
+                        py-2.5
+                        text-sm
+                        font-bold
                         text-white
-                        transition
-                        hover:bg-[#2F5536]
+                        transition-all
+                        duration-200
+                        hover:bg-[#1E5642]
+                        hover:shadow-md
+                        active:scale-[0.98]
+                        focus-visible:outline
+                        focus-visible:outline-2
+                        focus-visible:outline-offset-2
+                        focus-visible:outline-[#10B981]
                     "
+                    aria-label={`Ver detalle de ${inmueble.titulo}`}
                 >
-
-                    <FiEye />
-
-                    Ver detalle
-
+                    <span>Ver detalle</span>
+                    <FiArrowRight
+                        size={15}
+                        className="
+                            transition-transform
+                            duration-200
+                            group-hover/cta:translate-x-1
+                        "
+                    />
                 </Link>
 
             </div>

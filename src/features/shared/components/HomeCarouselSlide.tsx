@@ -17,22 +17,27 @@ const HomeCarouselSlide = ({
 
         <article
             className="
-                grid
-                min-h-[650px]
                 overflow-hidden
                 rounded-3xl
                 bg-white
-                shadow-xl
+                shadow-sm
+                border
+                border-gray-100/80
+                transition-shadow
+                duration-300
+                hover:shadow-md
+                min-h-[580px]
+                grid
                 lg:grid-cols-2
             "
         >
 
-            {/* Mitad izquierda */}
+            {/* Mitad izquierda — imagen del inmueble */}
             <HomePropertyPanel
                 item={item}
             />
 
-            {/* Mitad derecha */}
+            {/* Mitad derecha — información editorial */}
             <HomePublicationPanel
                 item={item}
             />

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
     FiArrowRight,
     FiCalendar,
-    FiFileText,
     FiTag,
 } from "react-icons/fi";
 
@@ -23,7 +22,11 @@ const HomePublicationPanel = ({
 
     const fecha = new Date(
         item.fechaPublicacion
-    ).toLocaleDateString("es-BO");
+    ).toLocaleDateString("es-BO", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+    });
 
 
     return (
@@ -33,180 +36,186 @@ const HomePublicationPanel = ({
                 flex
                 h-full
                 flex-col
-                justify-center
+                justify-between
                 bg-white
-                p-10
-                lg:p-14
+                p-8
+                sm:p-10
+                lg:p-12
             "
         >
 
-            <span
-                className="
-                    mb-4
-                    w-fit
-                    rounded-full
-                    bg-[#386641]/10
-                    px-4
-                    py-2
-                    text-xs
-                    font-semibold
-                    uppercase
-                    tracking-widest
-                    text-[#386641]
-                "
-            >
+            {/* ── Parte superior ─────────────────────────── */}
+            <div className="flex-1 flex flex-col">
 
-                {item.tipoPublicacion}
-
-            </span>
-
-
-            <h2
-                className="
-                    text-4xl
-                    font-bold
-                    leading-tight
-                    text-[#1F1F1F]
-                "
-            >
-
-                {item.tituloPublicacion}
-
-            </h2>
-
-
-            <div
-                className="
-                    mt-8
-                    flex
-                    items-center
-                    gap-2
-                    text-sm
-                    text-gray-500
-                "
-            >
-
-                <FiCalendar />
-
-                <span>
-
-                    Publicado el {fecha}
-
-                </span>
-
-            </div>
-
-
-            <div
-                className="
-                    mt-8
-                    flex
-                    items-start
-                    gap-3
-                "
-            >
-
-                <FiFileText
+                {/* Badge — tipo de publicación */}
+                <span
                     className="
-                        mt-1
-                        text-[#6A994E]
-                    "
-                    size={20}
-                />
-
-                <p
-                    className="
-                        text-base
-                        leading-8
-                        text-gray-600
+                        mb-5
+                        w-fit
+                        inline-flex
+                        items-center
+                        gap-1.5
+                        rounded-full
+                        bg-[#10B981]/10
+                        border
+                        border-[#10B981]/20
+                        px-3
+                        py-1
+                        text-[11px]
+                        font-bold
+                        uppercase
+                        tracking-widest
+                        text-[#0F382C]
                     "
                 >
+                    {item.tipoPublicacion}
+                </span>
 
+
+                {/* Título de la publicación */}
+                <h2
+                    className="
+                        text-2xl
+                        md:text-3xl
+                        font-extrabold
+                        leading-tight
+                        text-[#0F382C]
+                        line-clamp-3
+                    "
+                >
+                    {item.tituloPublicacion}
+                </h2>
+
+
+                {/* Fecha de publicación */}
+                <div
+                    className="
+                        mt-4
+                        flex
+                        items-center
+                        gap-2
+                        text-xs
+                        text-gray-400
+                    "
+                >
+                    <FiCalendar
+                        size={13}
+                        className="shrink-0"
+                    />
+                    <span>Publicado el {fecha}</span>
+                </div>
+
+
+                {/* Contenido / resumen */}
+                <p
+                    className="
+                        mt-6
+                        text-sm
+                        leading-7
+                        text-gray-600
+                        line-clamp-4
+                    "
+                >
                     {item.contenidoPublicacion}
-
                 </p>
 
             </div>
 
 
-            <div
-                className="
-                    mt-8
-                    flex
-                    items-center
-                    gap-3
-                    rounded-2xl
-                    bg-[#F7F8F6]
-                    p-5
-                "
-            >
+            {/* ── Parte inferior ─────────────────────────── */}
+            <div className="mt-8 flex flex-col gap-5">
 
-                <FiTag
-                    size={20}
-                    className="text-[#386641]"
-                />
-
-                <div>
-
-                    <p
+                {/* Precio — cápsula destacada */}
+                <div
+                    className="
+                        flex
+                        items-center
+                        gap-4
+                        rounded-2xl
+                        border
+                        border-gray-100
+                        bg-[#F8F9FA]
+                        px-5
+                        py-4
+                    "
+                    aria-label={`Precio: ${item.moneda} ${Number(item.precio ?? 0).toLocaleString()}`}
+                >
+                    <div
                         className="
-                            text-xs
-                            uppercase
-                            tracking-widest
-                            text-gray-500
+                            flex
+                            h-10
+                            w-10
+                            shrink-0
+                            items-center
+                            justify-center
+                            rounded-xl
+                            bg-[#0F382C]/8
+                            text-[#0F382C]
                         "
                     >
-
-                        Precio
-
-                    </p>
-
-                    <p
-                        className="
-                            text-2xl
-                            font-bold
-                            text-[#386641]
-                        "
-                    >
-
-                        {item.moneda}{" "}
-                        {Number(item.precio ?? 0).toLocaleString()}
-
-                    </p>
-
+                        <FiTag size={18} />
+                    </div>
+                    <div>
+                        <p
+                            className="
+                                text-[10px]
+                                font-bold
+                                uppercase
+                                tracking-widest
+                                text-gray-400
+                            "
+                        >
+                            Precio
+                        </p>
+                        <p
+                            className="
+                                text-xl
+                                font-extrabold
+                                text-[#0F382C]
+                                leading-tight
+                            "
+                        >
+                            {item.moneda}{" "}
+                            {Number(item.precio ?? 0).toLocaleString()}
+                        </p>
+                    </div>
                 </div>
 
-            </div>
 
-
-            {/* ============================================
-                ACCESO AL DETALLE PÚBLICO DEL INMUEBLE
-            ============================================ */}
-
-            <div className="mt-12">
-
+                {/* CTA — ver detalle del inmueble */}
+                {/* ⚠️ Ruta original intacta: /catalogo/:idInmueble */}
                 <Link
                     to={`/catalogo/${item.idInmueble}`}
                     className="
+                        group
                         inline-flex
                         items-center
+                        justify-center
                         gap-3
                         rounded-2xl
-                        bg-[#386641]
-                        px-8
-                        py-4
-                        text-lg
-                        font-semibold
+                        bg-[#0F382C]
+                        px-7
+                        py-3.5
+                        text-sm
+                        font-bold
                         text-white
-                        transition
-                        hover:bg-[#2F5536]
+                        transition-all
+                        duration-200
+                        hover:bg-[#1E5642]
+                        hover:shadow-lg
+                        active:scale-[0.98]
+                        focus-visible:outline
+                        focus-visible:outline-2
+                        focus-visible:outline-offset-2
+                        focus-visible:outline-[#10B981]
                     "
+                    aria-label={`Ver detalle del inmueble: ${item.tituloInmueble}`}
                 >
-
-                    Ver detalle
-
-                    <FiArrowRight size={20} />
-
+                    <span>Ver detalle</span>
+                    <FiArrowRight
+                        size={17}
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                    />
                 </Link>
 
             </div>

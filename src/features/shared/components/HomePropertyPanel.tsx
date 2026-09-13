@@ -1,7 +1,6 @@
 import {
-    FiHome,
     FiMapPin,
-    FiDollarSign,
+    FiHome,
 } from "react-icons/fi";
 
 import {
@@ -38,44 +37,82 @@ const HomePropertyPanel = ({
             className="
                 relative
                 h-full
+                min-h-[300px]
+                lg:min-h-0
                 overflow-hidden
+                group
             "
         >
 
-            {/* ========================================
-                IMAGEN
-            ======================================== */}
+            {/* ============================================
+                IMAGEN — protagonista visual
+            ============================================ */}
 
             <img
                 src={imagen}
                 alt={item.tituloInmueble}
                 className="
+                    absolute
+                    inset-0
                     h-full
                     w-full
                     object-cover
+                    object-center
+                    transition-transform
+                    duration-700
+                    ease-out
+                    group-hover:scale-[1.03]
                 "
             />
 
 
-            {/* ========================================
-                DEGRADADO
-            ======================================== */}
+            {/* ============================================
+                DEGRADADO — legibilidad del texto inferior
+            ============================================ */}
 
             <div
                 className="
                     absolute
                     inset-0
                     bg-gradient-to-t
-                    from-black/75
-                    via-black/20
+                    from-[#0F382C]/85
+                    via-[#0F382C]/35
                     to-transparent
                 "
             />
 
+            {/* ============================================
+                OVERLAY SUPERIOR — badge de código
+            ============================================ */}
 
-            {/* ========================================
-                INFORMACIÓN
-            ======================================== */}
+            <div className="absolute top-6 left-6 z-10">
+                <span
+                    className="
+                        inline-flex
+                        items-center
+                        gap-1.5
+                        rounded-full
+                        bg-white/15
+                        backdrop-blur-sm
+                        border
+                        border-white/30
+                        px-3
+                        py-1
+                        text-[11px]
+                        font-bold
+                        uppercase
+                        tracking-wider
+                        text-white
+                    "
+                >
+                    {item.codigo}
+                </span>
+            </div>
+
+
+            {/* ============================================
+                INFORMACIÓN INFERIOR
+            ============================================ */}
 
             <div
                 className="
@@ -83,143 +120,79 @@ const HomePropertyPanel = ({
                     bottom-0
                     left-0
                     right-0
-                    p-8
+                    z-10
+                    p-7
                     text-white
                 "
             >
 
-                <span
+                {/* Título del inmueble */}
+                <h3
                     className="
-                        inline-flex
-                        items-center
-                        rounded-full
-                        bg-[#6A994E]
-                        px-4
-                        py-1
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-wider
-                    "
-                >
-
-                    {item.codigo}
-
-                </span>
-
-
-                <h2
-                    className="
-                        mt-4
-                        text-4xl
-                        font-bold
+                        text-2xl
+                        md:text-3xl
+                        font-extrabold
                         leading-tight
+                        drop-shadow-sm
+                        line-clamp-2
                     "
                 >
-
                     {item.tituloInmueble}
+                </h3>
 
-                </h2>
 
-
+                {/* Descripción breve */}
                 <p
                     className="
-                        mt-4
-                        max-w-xl
-                        text-base
-                        leading-7
-                        text-gray-200
-                        line-clamp-3
+                        mt-2
+                        text-sm
+                        leading-6
+                        text-white/80
+                        line-clamp-2
+                        max-w-md
                     "
                 >
-
                     {item.descripcionInmueble}
-
                 </p>
 
 
+                {/* Metadatos — ubicación y zona */}
                 <div
                     className="
-                        mt-6
+                        mt-4
                         flex
                         flex-wrap
-                        gap-6
-                        text-sm
+                        gap-x-5
+                        gap-y-2
+                        text-xs
+                        text-white/75
                     "
                 >
 
                     {/* Ubicación */}
-
-                    <div
-                        className="
-                            flex
-                            items-center
-                            gap-2
-                        "
+                    <span
+                        className="flex items-center gap-1.5"
                     >
-
-                        <FiMapPin />
-
-                        <span>
-
-                            {item.departamento},{" "}
-                            {item.ciudad}
-
-                        </span>
-
-                    </div>
+                        <FiMapPin
+                            size={13}
+                            className="text-[#10B981] shrink-0"
+                        />
+                        {item.departamento},&nbsp;{item.ciudad}
+                    </span>
 
 
                     {/* Zona */}
-
-                    <div
-                        className="
-                            flex
-                            items-center
-                            gap-2
-                        "
-                    >
-
-                        <FiHome />
-
-                        <span>
-
-                            {item.zona ||
-                                "Zona no registrada"}
-
-                        </span>
-
-                    </div>
-
-
-                    {/* Precio */}
-
-                    <div
-                        className="
-                            flex
-                            items-center
-                            gap-2
-                        "
-                    >
-
-                        <FiDollarSign />
-
+                    {item.zona && (
                         <span
-                            className="
-                                text-xl
-                                font-bold
-                            "
+                            className="flex items-center gap-1.5"
                         >
-
-                            {item.moneda}{" "}
-
-                            {Number(
-                                item.precio ?? 0
-                            ).toLocaleString()}
-
+                            <FiHome
+                                size={13}
+                                className="text-[#10B981] shrink-0"
+                            />
+                            {item.zona}
                         </span>
-
-                    </div>
+                    )}
 
                 </div>
 
