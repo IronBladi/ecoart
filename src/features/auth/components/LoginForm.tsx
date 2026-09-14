@@ -127,9 +127,7 @@ const LoginForm = () => {
 
 
     const recuperarPassword = () => {
-
-        navigate("/recuperar-password");
-
+        navigate("/forgot-password");
     };
 
 
@@ -307,9 +305,7 @@ const LoginForm = () => {
                         hover:underline
                     "
                 >
-
                     ¿Olvidaste tu contraseña?
-
                 </button>
 
             </div>

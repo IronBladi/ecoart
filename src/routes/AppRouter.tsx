@@ -25,6 +25,8 @@ import {
 import {
     LoginPage,
     RegisterPage,
+    ResetPasswordPage,
+    ForgotPasswordPage,
 } from "../features/auth";
 
 import {
@@ -138,6 +140,16 @@ const AppRouter = () => {
                 <Route
                     path="/registro"
                     element={<RegisterPage />}
+                />
+
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPasswordPage />}
+                />
+
+                <Route
+                    path="/reset-password"
+                    element={<ResetPasswordPage />}
                 />
 
                 {/* =========================
