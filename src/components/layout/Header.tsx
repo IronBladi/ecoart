@@ -1,13 +1,10 @@
 import { FiBell, FiCheckCircle } from "react-icons/fi";
-
 import { useAuth } from "../../features/auth";
 
 const Header = () => {
-
     const { usuario } = useAuth();
 
     return (
-
         <header
             className="
                 sticky
@@ -18,28 +15,24 @@ const Header = () => {
                 items-center
                 justify-between
                 border-b
-                border-[#E8E5D9]
-                bg-[#F8F7F2]/90
+                border-gray-200
+                bg-white/95
                 px-10
-                backdrop-blur
+                backdrop-blur-md
             "
         >
-
             {/* IZQUIERDA */}
-
             <div>
-
                 <h1
                     className="
                         text-3xl
                         font-bold
                         tracking-tight
-                        text-[#386641]
+                        text-primary
                     "
                 >
                     Dashboard
                 </h1>
-
                 <p
                     className="
                         mt-1
@@ -48,23 +41,19 @@ const Header = () => {
                     "
                 >
                     Bienvenido nuevamente
-
                     <span
                         className="
                             ml-1
-                            font-semibold
-                            text-[#386641]
+                            font-bold
+                            text-primary
                         "
                     >
                         {usuario?.nombre}
                     </span>
-
                 </p>
-
             </div>
 
             {/* DERECHA */}
-
             <div
                 className="
                     flex
@@ -72,9 +61,7 @@ const Header = () => {
                     gap-6
                 "
             >
-
                 {/* Estado del sistema */}
-
                 <div
                     className="
                         flex
@@ -82,16 +69,14 @@ const Header = () => {
                         gap-3
                         rounded-2xl
                         border
-                        border-[#E7E4D8]
+                        border-gray-100
                         bg-white
                         px-5
                         py-3
                         shadow-sm
                     "
                 >
-
                     {/* Indicador visual */}
-
                     <div
                         className="
                             flex
@@ -100,21 +85,16 @@ const Header = () => {
                             items-center
                             justify-center
                             rounded-full
-                            bg-[#A7C957]/20
+                            bg-accent/20
                         "
                     >
-
                         <FiCheckCircle
                             size={20}
-                            className="text-[#386641]"
+                            className="text-accent"
                         />
-
                     </div>
-
                     {/* Información del estado */}
-
                     <div>
-
                         <p
                             className="
                                 text-xs
@@ -124,7 +104,6 @@ const Header = () => {
                         >
                             Estado del sistema
                         </p>
-
                         <div
                             className="
                                 mt-0.5
@@ -133,34 +112,28 @@ const Header = () => {
                                 gap-2
                             "
                         >
-
                             <span
                                 className="
                                     h-2
                                     w-2
                                     rounded-full
-                                    bg-[#6A994E]
+                                    bg-accent
                                 "
                             />
-
                             <span
                                 className="
                                     text-sm
-                                    font-semibold
-                                    text-[#386641]
+                                    font-bold
+                                    text-primary
                                 "
                             >
                                 Operativo
                             </span>
-
                         </div>
-
                     </div>
-
                 </div>
 
                 {/* Notificaciones */}
-
                 <button
                     className="
                         relative
@@ -170,105 +143,94 @@ const Header = () => {
                         items-center
                         justify-center
                         rounded-full
+                        border
+                        border-gray-100
                         bg-white
                         shadow-sm
-                        transition
-                        hover:scale-105
+                        transition-all
+                        duration-200
+                        hover:bg-gray-50
+                        active:scale-95
                     "
                 >
-
                     <FiBell
                         size={20}
-                        className="text-[#386641]"
+                        className="text-primary"
                     />
-
                     <span
                         className="
                             absolute
-                            right-2
-                            top-2
+                            right-2.5
+                            top-2.5
                             h-2
                             w-2
                             rounded-full
-                            bg-[#BC4749]
+                            bg-red-500
                         "
                     />
-
                 </button>
 
                 {/* Usuario */}
-
                 <div
                     className="
                         flex
                         items-center
                         gap-4
                         rounded-2xl
+                        border
+                        border-gray-100
                         bg-white
                         px-4
                         py-2
                         shadow-sm
                     "
                 >
-
                     <div
                         className="
                             flex
-                            h-12
-                            w-12
+                            h-11
+                            w-11
                             items-center
                             justify-center
                             rounded-full
-                            bg-gradient-to-br
-                            from-[#386641]
-                            to-[#6A994E]
+                            bg-primary/10
                             text-lg
                             font-bold
-                            text-white
-                            shadow
+                            text-primary
                         "
                     >
                         {usuario?.nombre?.charAt(0).toUpperCase()}
                     </div>
-
                     <div>
-
                         <p
                             className="
                                 text-sm
-                                font-semibold
-                                text-gray-800
+                                font-bold
+                                text-primary
                             "
                         >
                             {usuario?.nombre}
                         </p>
-
                         <span
                             className="
-                                mt-1
+                                mt-0.5
                                 inline-flex
                                 rounded-full
-                                bg-[#A7C957]/25
-                                px-3
-                                py-1
+                                bg-primary/10
+                                px-2.5
+                                py-0.5
                                 text-xs
-                                font-semibold
-                                text-[#386641]
+                                font-bold
+                                text-primary
                             "
                         >
                             {usuario?.rol}
                         </span>
-
                     </div>
-
                 </div>
-
             </div>
-
         </header>
-
     );
-
 };
 
 export default Header;

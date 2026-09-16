@@ -1,209 +1,197 @@
 import { useNavigate } from "react-router-dom";
-
-
-
+import { FiUser, FiMail, FiShield, FiPlusCircle, FiImage, FiHome, FiInfo, FiGrid } from "react-icons/fi";
 import { useAuth } from "../../auth";
 
 const DashboardGerente = () => {
-
     const { usuario } = useAuth();
-
     const navigate = useNavigate();
 
     return (
-
-        <div className="space-y-8">
-
+        <div className="space-y-8 max-w-7xl mx-auto">
             {/* BIENVENIDA */}
-
-            <section className="rounded-3xl bg-gradient-to-r from-[#386641] via-[#4D7B4C] to-[#6A994E] p-10 text-white shadow-xl">
-
-                <p className="mb-2 text-sm uppercase tracking-[0.3em] text-[#F2E8CF]">
-
-                    Dashboard
-
-                </p>
-
-                <h1 className="text-4xl font-bold">
-
-                    Bienvenido, {usuario?.nombre}
-
-                </h1>
-
-                <p className="mt-4 max-w-3xl text-lg leading-8 text-[#F2E8CF]">
-
-                    Gestiona tus inmuebles desde un solo lugar.
-                    Consulta información, registra nuevos inmuebles,
-                    actualiza propietarios y administra las fotografías
-                    del sistema EcoArt.
-
-                </p>
-
+            <section className="relative overflow-hidden rounded-2xl bg-primary p-8 sm:p-10 text-white shadow-md">
+                <div className="relative z-10">
+                    <p className="mb-3 flex items-center gap-2 text-xs uppercase tracking-widest text-accent font-semibold">
+                        <FiGrid className="text-sm" />
+                        Dashboard
+                    </p>
+                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                        Bienvenido, {usuario?.nombre}
+                    </h1>
+                    <p className="mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-gray-200">
+                        Gestiona tus inmuebles desde un solo lugar.
+                        Consulta información, registra nuevos inmuebles,
+                        actualiza propietarios y administra las fotografías
+                        del sistema EcoArt.
+                    </p>
+                </div>
+                {/* Decorative background element */}
+                <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-accent/20 to-transparent opacity-50 blur-3xl pointer-events-none" />
             </section>
 
             {/* TARJETAS */}
-
-            <section className="grid gap-6 lg:grid-cols-3">
-
-                <div className="rounded-3xl bg-[#386641] p-6 text-white shadow-lg transition duration-300 hover:-translate-y-1">
-
-                    <p className="text-sm uppercase tracking-widest text-[#F2E8CF]">
-
-                        Usuario
-
-                    </p>
-
-                    <h2 className="mt-4 text-3xl font-bold">
-
+            <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="group rounded-2xl bg-white border border-gray-100 p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                            <FiUser className="text-lg" />
+                        </div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Usuario
+                        </p>
+                    </div>
+                    <h2 className="mt-4 text-2xl font-bold text-primary">
                         {usuario?.nombre}
-
                     </h2>
-
                 </div>
 
-                <div className="rounded-3xl bg-[#A7C957] p-6 shadow-lg transition duration-300 hover:-translate-y-1">
-
-                    <p className="text-sm uppercase tracking-widest text-[#386641]">
-
-                        Correo
-
-                    </p>
-
-                    <h2 className="mt-4 break-all text-lg font-semibold text-[#1F1F1F]">
-
+                <div className="group rounded-2xl bg-white border border-gray-100 p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                            <FiMail className="text-lg" />
+                        </div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Correo
+                        </p>
+                    </div>
+                    <h2 className="mt-4 truncate text-lg font-bold text-primary">
                         {usuario?.correo}
-
                     </h2>
-
                 </div>
 
-                <div className="rounded-3xl bg-[#F2E8CF] p-6 shadow-lg transition duration-300 hover:-translate-y-1">
-
-                    <p className="text-sm uppercase tracking-widest text-[#386641]">
-
-                        Rol
-
-                    </p>
-
-                    <span className="mt-5 inline-flex rounded-full bg-[#386641] px-5 py-2 text-sm font-semibold text-white">
-
-                        {usuario?.rol}
-
-                    </span>
-
+                <div className="group rounded-2xl bg-white border border-gray-100 p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 text-accent">
+                            <FiShield className="text-lg text-primary" />
+                        </div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Rol
+                        </p>
+                    </div>
+                    <div className="mt-4">
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">
+                            <div className="h-2 w-2 rounded-full bg-accent"></div>
+                            {usuario?.rol}
+                        </span>
+                    </div>
                 </div>
-
             </section>
 
             {/* DOS COLUMNAS */}
-
             <section className="grid gap-6 xl:grid-cols-3">
-
                 {/* PANEL PRINCIPAL */}
-
-                <div className="rounded-3xl bg-white p-8 shadow-md xl:col-span-2">
-
-                    <h2 className="mb-5 text-2xl font-bold text-[#386641]">
-
-                        Panel Principal
-
-                    </h2>
-
-                    <p className="leading-8 text-gray-600">
-
+                <div className="rounded-2xl bg-white border border-gray-100 p-6 sm:p-8 shadow-sm xl:col-span-2">
+                    <div className="flex items-center gap-3 mb-5">
+                        <FiInfo className="text-2xl text-accent" />
+                        <h2 className="text-xl font-bold text-primary">
+                            Panel Principal
+                        </h2>
+                    </div>
+                    <p className="leading-relaxed text-gray-600 text-base sm:text-lg">
                         Desde este panel podrás administrar los módulos
                         principales del sistema EcoArt. Actualmente puedes
                         registrar inmuebles, propietarios y gestionar las
                         fotografías asociadas a cada inmueble. En los
                         siguientes sprints se incorporarán publicaciones,
                         valoraciones, seguimientos y reportes.
-
                     </p>
-
                 </div>
 
                 {/* REGISTROS RÁPIDOS */}
-
-                <div className="rounded-3xl bg-white p-8 shadow-md">
-
-                    <h2 className="mb-5 text-xl font-bold text-[#386641]">
-
+                <div className="rounded-2xl bg-white border border-gray-100 p-6 sm:p-8 shadow-sm">
+                    <h2 className="mb-6 text-lg font-bold text-primary">
                         Registros rápidos
-
                     </h2>
-
                     <div className="space-y-4">
-
                         <button
-                            onClick={() =>
-                                navigate("/inmuebles/nuevo")
-                            }
+                            onClick={() => navigate("/inmuebles/nuevo")}
                             className="
+                                group
+                                flex
                                 w-full
+                                items-center
+                                justify-center
+                                gap-2
                                 rounded-xl
-                                bg-[#386641]
-                                py-3
+                                bg-primary
+                                py-3.5
+                                px-4
                                 font-semibold
                                 text-white
-                                transition
-                                hover:bg-[#2F5536]
+                                shadow-sm
+                                transition-all
+                                duration-200
+                                hover:bg-secondary
+                                hover:shadow-md
+                                active:scale-95
                             "
                         >
-
-                            Registrar inmueble
-
+                            <FiHome className="text-lg transition-transform group-hover:scale-110" />
+                            <span>Registrar inmueble</span>
                         </button>
 
                         <button
-                            onClick={() =>
-                                navigate("/propietarios/nuevo")
-                            }
+                            onClick={() => navigate("/propietarios/nuevo")}
                             className="
+                                group
+                                flex
                                 w-full
+                                items-center
+                                justify-center
+                                gap-2
                                 rounded-xl
-                                bg-[#6A994E]
-                                py-3
+                                border border-gray-200
+                                bg-white
+                                py-3.5
+                                px-4
                                 font-semibold
-                                text-white
-                                transition
-                                hover:bg-[#5A8741]
+                                text-gray-700
+                                shadow-xs
+                                transition-all
+                                duration-200
+                                hover:bg-gray-50
+                                hover:border-gray-300
+                                hover:text-primary
+                                active:scale-95
                             "
                         >
-
-                            Registrar propietario
-
+                            <FiPlusCircle className="text-lg transition-transform group-hover:scale-110" />
+                            <span>Registrar propietario</span>
                         </button>
 
                         <button
-                            onClick={() =>
-                                navigate("/inmuebles")
-                            }
+                            onClick={() => navigate("/inmuebles")}
                             className="
+                                group
+                                flex
                                 w-full
+                                items-center
+                                justify-center
+                                gap-2
                                 rounded-xl
-                                bg-[#BC4749]
-                                py-3
+                                border border-gray-200
+                                bg-white
+                                py-3.5
+                                px-4
                                 font-semibold
-                                text-white
-                                transition
-                                hover:bg-[#A33B3D]
+                                text-gray-700
+                                shadow-xs
+                                transition-all
+                                duration-200
+                                hover:bg-gray-50
+                                hover:border-gray-300
+                                hover:text-primary
+                                active:scale-95
                             "
                         >
-
-                            Registrar fotografías
-
+                            <FiImage className="text-lg transition-transform group-hover:scale-110" />
+                            <span>Registrar fotografías</span>
                         </button>
-
                     </div>
-
                 </div>
-
             </section>
-
         </div>
-
     );
-
 };
 
 export default DashboardGerente;

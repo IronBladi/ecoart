@@ -12,15 +12,12 @@ const MenuItem = ({
     text,
     icon: Icon,
 }: Props) => {
-
     return (
-
         <NavLink
             to={to}
             className={({ isActive }) => `
                 group
                 relative
-                mb-2
                 flex
                 items-center
                 gap-4
@@ -29,21 +26,19 @@ const MenuItem = ({
                 px-5
                 py-3
                 transition-all
-                duration-300
+                duration-200
+                active:scale-95
 
                 ${
                     isActive
-                        ? "bg-[#F2E8CF] text-[#386641] shadow-lg"
-                        : "text-[#F2E8CF] hover:bg-[#4B7A54]"
+                        ? "bg-white/10 text-white font-semibold"
+                        : "text-white/70 hover:bg-white/5 hover:text-white"
                 }
             `}
         >
-
             {({ isActive }) => (
                 <>
-
                     {/* Indicador lateral */}
-
                     <span
                         className={`
                             absolute
@@ -53,45 +48,40 @@ const MenuItem = ({
                             w-1
                             rounded-r-full
                             transition-all
+                            duration-300
 
                             ${
                                 isActive
-                                    ? "bg-[#A7C957]"
-                                    : "bg-transparent group-hover:bg-[#A7C957]"
+                                    ? "bg-accent"
+                                    : "bg-transparent group-hover:bg-accent/50"
                             }
                         `}
                     />
 
                     {/* Icono */}
-
                     <Icon
-                        size={21}
-                        className="
+                        size={20}
+                        className={`
                             transition-transform
                             duration-300
                             group-hover:scale-110
-                        "
+                            ${isActive ? "text-accent" : ""}
+                        `}
                     />
 
                     {/* Texto */}
-
                     <span
                         className="
                             text-[15px]
-                            font-medium
                             tracking-wide
                         "
                     >
                         {text}
                     </span>
-
                 </>
             )}
-
         </NavLink>
-
     );
-
 };
 
 export default MenuItem;
