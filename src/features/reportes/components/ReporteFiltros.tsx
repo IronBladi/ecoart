@@ -212,14 +212,16 @@ const ReporteFiltros = ({
 
                     </label>
 
-                    <input
-                        type="number"
-                        placeholder="Id Estado"
+                    <select
+                        value={filtro.idEstado ?? ""}
                         onChange={(e) =>
-                            handleChange(
-                                "idEstado",
-                                e.target.value
-                            )
+                            setFiltro(prev => ({
+                                ...prev,
+                                idEstado:
+                                    e.target.value === ""
+                                        ? undefined
+                                        : Number(e.target.value),
+                            }))
                         }
                         className="
                             w-full
@@ -231,7 +233,27 @@ const ReporteFiltros = ({
                             focus:border-[#386641]
                             focus:outline-none
                         "
-                    />
+                    >
+
+                        <option value="">
+
+                            Todos
+
+                        </option>
+
+                        <option value="1">
+
+                            Disponible
+
+                        </option>
+
+                        <option value="2">
+
+                            Vendido
+
+                        </option>
+
+                    </select>
 
                 </div>
 
@@ -245,14 +267,16 @@ const ReporteFiltros = ({
 
                     </label>
 
-                    <input
-                        type="number"
-                        placeholder="Id Tipo"
+                    <select
+                        value={filtro.idTipo ?? ""}
                         onChange={(e) =>
-                            handleChange(
-                                "idTipo",
-                                e.target.value
-                            )
+                            setFiltro(prev => ({
+                                ...prev,
+                                idTipo:
+                                    e.target.value === ""
+                                        ? undefined
+                                        : Number(e.target.value),
+                            }))
                         }
                         className="
                             w-full
@@ -264,7 +288,39 @@ const ReporteFiltros = ({
                             focus:border-[#386641]
                             focus:outline-none
                         "
-                    />
+                    >
+
+                        <option value="">
+
+                            Todos
+
+                        </option>
+
+                        <option value="1">
+
+                            Casa
+
+                        </option>
+
+                        <option value="2">
+
+                            Inmueble en construcción
+
+                        </option>
+
+                        <option value="3">
+
+                            Terreno
+
+                        </option>
+
+                        <option value="4">
+
+                            Departamento
+
+                        </option>
+
+                    </select>
 
                 </div>
 
@@ -351,3 +407,5 @@ const ReporteFiltros = ({
 };
 
 export default ReporteFiltros;
+
+

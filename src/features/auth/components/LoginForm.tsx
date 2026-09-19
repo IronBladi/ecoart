@@ -98,7 +98,6 @@ const LoginForm = () => {
                 const mensaje =
                     error.response?.data?.mensaje;
 
-
                 if (mensaje) {
 
                     setErrorLogin(
@@ -127,7 +126,9 @@ const LoginForm = () => {
 
 
     const recuperarPassword = () => {
+
         navigate("/forgot-password");
+
     };
 
 
@@ -195,12 +196,10 @@ const LoginForm = () => {
                 <input
                     type="email"
                     {...register("correo")}
-                    onChange={() => {
-
+                    onFocus={() => {
                         if (errorLogin) {
                             setErrorLogin(null);
                         }
-
                     }}
                     className="
                         w-full
@@ -252,12 +251,10 @@ const LoginForm = () => {
                 <input
                     type="password"
                     {...register("password")}
-                    onChange={() => {
-
+                    onFocus={() => {
                         if (errorLogin) {
                             setErrorLogin(null);
                         }
-
                     }}
                     className="
                         w-full
@@ -305,7 +302,9 @@ const LoginForm = () => {
                         hover:underline
                     "
                 >
+
                     ¿Olvidaste tu contraseña?
+
                 </button>
 
             </div>
@@ -375,4 +374,3 @@ const LoginForm = () => {
 
 
 export default LoginForm;
-

@@ -1,3 +1,4 @@
+
 import {
     useEffect,
     useState,
@@ -126,7 +127,8 @@ const InmuebleForm = ({
 
             idTipo: undefined,
 
-            idEstado: undefined,
+            // Disponible por defecto al crear
+            idEstado: 1,
 
             departamento: "",
 

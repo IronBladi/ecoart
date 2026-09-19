@@ -91,6 +91,8 @@ const HistorialFilters = ({
             >
 
 
+                {/* Usuario */}
+
                 <div>
 
                     <label
@@ -105,9 +107,8 @@ const HistorialFilters = ({
                     </label>
 
 
-                    <input
-                        type="number"
-                        placeholder="Id usuario"
+                    <select
+                        value={filtro.idUsuario ?? ""}
                         onChange={(e) =>
                             handleChange(
                                 "idUsuario",
@@ -122,11 +123,31 @@ const HistorialFilters = ({
                             px-4
                             py-2
                         "
-                    />
+                    >
+
+                        <option value="">
+                            Todos los usuarios
+                        </option>
+
+                        <option value="1">
+                            Pedro Fernando Acebo
+                        </option>
+
+                        <option value="2">
+                            Juan Alberto Zuñiga
+                        </option>
+
+                        <option value="3">
+                            Gabriel Aramayo
+                        </option>
+
+                    </select>
 
                 </div>
 
 
+
+                {/* Módulo */}
 
                 <div>
 
@@ -142,9 +163,8 @@ const HistorialFilters = ({
                     </label>
 
 
-                    <input
-                        type="text"
-                        placeholder="Ej: Usuarios"
+                    <select
+                        value={filtro.modulo ?? ""}
                         onChange={(e) =>
                             handleChange(
                                 "modulo",
@@ -159,11 +179,47 @@ const HistorialFilters = ({
                             px-4
                             py-2
                         "
-                    />
+                    >
+
+                        <option value="">
+                            Todos los módulos
+                        </option>
+
+                        <option value="Usuarios">
+                            Usuarios
+                        </option>
+
+                        <option value="Propietarios">
+                            Propietarios
+                        </option>
+
+                        <option value="Inmuebles">
+                            Inmuebles
+                        </option>
+
+                        <option value="Publicaciones">
+                            Publicaciones
+                        </option>
+
+                        <option value="Seguimientos">
+                            Seguimientos
+                        </option>
+
+                        <option value="Reportes">
+                            Reportes
+                        </option>
+
+                        <option value="Autenticación">
+                            Autenticación
+                        </option>
+
+                    </select>
 
                 </div>
 
 
+
+                {/* Acción */}
 
                 <div>
 
@@ -179,9 +235,8 @@ const HistorialFilters = ({
                     </label>
 
 
-                    <input
-                        type="text"
-                        placeholder="Ej: Crear"
+                    <select
+                        value={filtro.accion ?? ""}
                         onChange={(e) =>
                             handleChange(
                                 "accion",
@@ -196,11 +251,43 @@ const HistorialFilters = ({
                             px-4
                             py-2
                         "
-                    />
+                    >
+
+                        <option value="">
+                            Todas las acciones
+                        </option>
+
+                        <option value="Crear">
+                            Crear
+                        </option>
+
+                        <option value="Actualizar">
+                            Actualizar
+                        </option>
+
+                        <option value="Eliminar">
+                            Eliminar
+                        </option>
+
+                        <option value="Consultar">
+                            Consultar
+                        </option>
+
+                        <option value="Iniciar sesión">
+                            Iniciar sesión
+                        </option>
+
+                        <option value="Cerrar sesión">
+                            Cerrar sesión
+                        </option>
+
+                    </select>
 
                 </div>
 
 
+
+                {/* Fecha inicio */}
 
                 <div>
 
@@ -237,6 +324,8 @@ const HistorialFilters = ({
                 </div>
 
 
+
+                {/* Fecha fin */}
 
                 <div>
 
