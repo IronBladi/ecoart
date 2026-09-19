@@ -137,9 +137,10 @@ const CatalogFilters = ({ onBuscar }: Props) => {
                         >
                             <option value="">Todos los tipos</option>
                             <option value="1">Casa</option>
-                            <option value="2">Departamento</option>
+                            <option value="2">En construcción</option>
                             <option value="3">Terreno</option>
-                            <option value="4">Oficina</option>
+                            <option value="4">Departamento</option>
+                            <option value="5">Oficina</option>
                         </select>
                         <div className="pointer-events-none absolute right-3 flex items-center text-gray-400">
                             <FiChevronDown size={16} />
@@ -224,4 +225,4 @@ const CatalogFilters = ({ onBuscar }: Props) => {
     );
 };
 
-export default CatalogFilters;
+export default CatalogFilters;

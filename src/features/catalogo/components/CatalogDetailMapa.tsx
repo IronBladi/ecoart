@@ -9,7 +9,36 @@ import {
     FiMapPin,
 } from "react-icons/fi";
 
+import L from "leaflet";
+
+import markerIcon from "../../../assets/leaflet/marker-icon.png";
+import markerIcon2x from "../../../assets/leaflet/marker-icon-2x.png";      
+import markerShadow from "../../../assets/leaflet/marker-shadow.png";   
+
 import "leaflet/dist/leaflet.css";
+
+
+// ==========================================
+// CONFIGURACIÓN DEL ICONO DE LEAFLET
+// ==========================================
+
+const markerIconConfig = L.icon({
+
+    iconUrl: markerIcon,
+
+    iconRetinaUrl: markerIcon2x,
+
+    shadowUrl: markerShadow,
+
+    iconSize: [25, 41],
+
+    iconAnchor: [12, 41],
+
+    popupAnchor: [1, -34],
+
+    shadowSize: [41, 41],
+
+});
 
 
 // ==========================================
@@ -34,8 +63,10 @@ const CatalogDetailMapa = ({
     longitud,
 }: Props) => {
 
-    // Si el inmueble no tiene coordenadas,
-    // no mostramos el mapa.
+    // ==========================================
+    // VALIDACIÓN DE COORDENADAS
+    // ==========================================
+
     if (
         latitud === undefined ||
         longitud === undefined
@@ -46,16 +77,27 @@ const CatalogDetailMapa = ({
     }
 
 
+    // ==========================================
+    // UBICACIÓN
+    // ==========================================
+
     const ubicacion: [number, number] = [
         latitud,
         longitud,
     ];
 
 
-    // Enlace universal compatible con Google Maps.
+    // ==========================================
+    // GOOGLE MAPS
+    // ==========================================
+
     const googleMapsUrl =
         `https://www.google.com/maps/search/?api=1&query=${latitud},${longitud}`;
 
+
+    // ==========================================
+    // RENDER
+    // ==========================================
 
     return (
 
@@ -69,7 +111,9 @@ const CatalogDetailMapa = ({
             "
         >
 
-            {/* Encabezado */}
+            {/* =====================================
+                ENCABEZADO
+            ====================================== */}
 
             <div
                 className="
@@ -82,6 +126,8 @@ const CatalogDetailMapa = ({
                     py-4
                 "
             >
+
+                {/* Título */}
 
                 <div
                     className="
@@ -99,6 +145,8 @@ const CatalogDetailMapa = ({
 
                 </div>
 
+
+                {/* Google Maps */}
 
                 <a
                     href={googleMapsUrl}
@@ -126,7 +174,9 @@ const CatalogDetailMapa = ({
             </div>
 
 
-            {/* Mapa */}
+            {/* =====================================
+                MAPA
+            ====================================== */}
 
             <MapContainer
                 center={ubicacion}
@@ -143,8 +193,12 @@ const CatalogDetailMapa = ({
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
+
+                {/* Marcador del inmueble */}
+
                 <Marker
                     position={ubicacion}
+                    icon={markerIconConfig}
                 />
 
             </MapContainer>
